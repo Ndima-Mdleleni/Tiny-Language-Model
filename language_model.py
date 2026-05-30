@@ -36,10 +36,10 @@ class TinyLanguageModel(nn.Module):
         self.output = nn.Linear(embedding_size, vocab_size)
 
     def forward(self, x):
-        embedded        = self.embedding(x)                              # fix 1
-        attended, _     = self.attention(embedded, embedded, embedded)   # fix 2
-        refined         = self.feedforward(attended)                     # fix 3
-        scores          = self.output(refined)                           # fix 4
+        embedded        = self.embedding(x)                              
+        attended, _     = self.attention(embedded, embedded, embedded)   
+        refined         = self.feedforward(attended)                     
+        scores          = self.output(refined)                           
         return scores
 
 model = TinyLanguageModel(
@@ -75,7 +75,7 @@ epochs = 300
 for epoch in range(epochs):
     total_loss = 0
     for inp, tgt in zip(inputs, targets):
-        inp_tensor = torch.tensor([inp], dtype=torch.long)   # fix 5
+        inp_tensor = torch.tensor([inp], dtype=torch.long)   
         tgt_tensor = torch.tensor(tgt,  dtype=torch.long)
 
         optimizer.zero_grad()
